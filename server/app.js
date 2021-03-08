@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.send(':)');
 });
 
-app.use('/api/spotify', spotifyRoutes)
-app.use('/api/qr', qrRoutes)
+app.use('/api/spotify', spotifyRoutes);
+app.use('/api/qr', qrRoutes);
 
 module.exports = app;

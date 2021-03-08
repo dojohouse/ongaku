@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const spotifyController = require('../controllers/spotifyController');
 
-
 router.get('/login', spotifyController.getLogin);
 router.get('/callback', spotifyController.getCallback);
 router.get('/me', spotifyController.getMe);

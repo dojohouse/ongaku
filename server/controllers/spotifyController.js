@@ -20,13 +20,13 @@ const scopes = [
   'user-read-playback-position',
   'user-read-recently-played',
   'user-follow-read',
-  'user-follow-modify'
+  'user-follow-modify',
 ];
 
 const spotifyApi = new SpotifyWebApi({
   redirectUri: process.env.redirect_uri, // Needs to be whitelisted in portal
   clientId: process.env.client_id,
-  clientSecret: process.env.client_secret
+  clientSecret: process.env.client_secret,
 });
 
 const getLogin = async (req, res) => {
@@ -41,7 +41,7 @@ const getCallback = async (req, res) => {
   if (error) {
     console.error('Callback Error:', error);
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 
@@ -59,7 +59,7 @@ const getCallback = async (req, res) => {
     // console.log(`Access token retrieved. Expires in ${expires_in} seconds.`);
 
     res.send({
-      message: 'ok'
+      message: 'ok',
     });
 
     setInterval(async () => {
@@ -72,10 +72,10 @@ const getCallback = async (req, res) => {
       console.log(`Access token ${access_token}`);
 
       spotifyApi.setAccessToken(access_token);
-    }, expires_in / 2 * 1000);
+    }, (expires_in / 2) * 1000);
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -87,20 +87,20 @@ const getMe = async (req, res) => {
     return res.status(200).send(body);
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
 
 const getDevices = async (req, res) => {
   try {
-    const response = await spotifyApi.getMyDevices()
+    const response = await spotifyApi.getMyDevices();
     const { body } = response;
     const { devices } = body;
     return res.status(200).send({ devices });
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -110,11 +110,11 @@ const getNow = async (req, res) => {
     const response = await spotifyApi.getMyCurrentPlayingTrack();
     const { body } = response;
     return res.status(200).send({
-      currentlyPlaying: body
+      currentlyPlaying: body,
     });
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -123,11 +123,11 @@ const getPlay = async (req, res) => {
   try {
     await spotifyApi.play();
     return res.status(200).send({
-      message: 'ok'
+      message: 'ok',
     });
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -136,14 +136,14 @@ const getPlayTrack = async (req, res) => {
   try {
     const { params } = req;
     await spotifyApi.play({
-      uris: [`spotify:track:${params.track_id}`]
-    })
+      uris: [`spotify:track:${params.track_id}`],
+    });
     return res.status(200).send({
-      message: 'ok'
-    })
+      message: 'ok',
+    });
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -152,11 +152,11 @@ const getPause = async (req, res) => {
   try {
     await spotifyApi.pause();
     return res.status(200).send({
-      message: 'ok'
+      message: 'ok',
     });
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -171,7 +171,7 @@ const getSearchTrack = async (req, res) => {
 
   if (!query) {
     return res.send({
-      error: 'query field missing'
+      error: 'query field missing',
     });
   }
 
@@ -179,11 +179,11 @@ const getSearchTrack = async (req, res) => {
     const response = await spotifyApi.searchTracks(query);
     return res.status(200).send({
       message: 'ok',
-      results: response
+      results: response,
     });
   } catch (error) {
     return res.send({
-      message: `${error}`
+      message: `${error}`,
     });
   }
 };
@@ -198,5 +198,5 @@ module.exports = {
   getPlayTrack,
   getPause,
   getSearch,
-  getSearchTrack
-}
+  getSearchTrack,
+};

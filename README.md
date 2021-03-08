@@ -35,4 +35,4 @@ Personal Vinyl Record Player  :notes:
     redirect_uri='http://localhost:8888/api/spotify/callback'
     ```
 
-7. Install the project with `npm install` and run application with `node server.js`
+7. Install the project with `npm install` and run application with `npm run start`
