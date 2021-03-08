@@ -118,6 +118,22 @@ app.get('/now', async (req, res) => {
   }
 });
 
+app.get('/play', async (req, res) => {
+  try {
+    spotifyApi.play();
+  } catch {
+    return res.send('Error');
+  }
+});
+
+app.get('/pause', async (req, res) => {
+  try {
+    spotifyApi.pause();
+  } catch {
+    return res.send('Error');
+  }
+});
+
 app.listen(8888, () => {
   console.log('Ongaku server up. Now go to http://localhost:8888/login in your browser.');
 });  
