@@ -121,6 +121,9 @@ app.get('/now', async (req, res) => {
 app.get('/play', async (req, res) => {
   try {
     spotifyApi.play();
+    return res.status(200).send({
+      message: 'ok'
+    });
   } catch {
     return res.send('Error');
   }
@@ -129,6 +132,9 @@ app.get('/play', async (req, res) => {
 app.get('/pause', async (req, res) => {
   try {
     spotifyApi.pause();
+    return res.status(200).send({
+      message: 'ok'
+    });
   } catch {
     return res.send('Error');
   }
