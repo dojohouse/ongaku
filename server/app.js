@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
+const fetch = require('node-fetch');
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const scopes = [
@@ -168,6 +169,56 @@ app.get('/pause', async (req, res) => {
       message: `${error}`
     });
   }
+});
+
+app.get('/search', async (req, res) => {
+  res.redirect(`/search/tracks?${new URLSearchParams(req.query)}`);
+});
+
+app.get('/search/tracks', async (req, res) => {
+  const {query: qs} = req;
+  const {query} = qs;
+
+  if (!query) {
+    return res.send({
+      error: 'query field missing'
+    });
+  }
+
+  try {
+    const response = await spotifyApi.searchTracks(query);
+    return res.status(200).send({
+      message: 'ok',
+      results: response
+    });
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
+  }
+});
+
+app.get('/qr/create', async (req, res) => {
+  const {query} = req;
+  const {data, size} = query;
+
+  const searchParams = {};
+  if (!data) {
+    return res.send({
+      error: 'data field missing'
+    });
+  }
+
+  searchParams.data = data;
+  if (size) {
+    searchParams.size = size;
+  }
+
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?${new URLSearchParams(searchParams)}`;
+  return res.status(200).send({
+    message: 'ok',
+    qrUrl
+  });
 });
 
 app.listen(8888, () => {
