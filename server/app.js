@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
+const fetch = require('node-fetch');
+const url = require('url');
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const scopes = [
@@ -168,6 +170,29 @@ app.get('/pause', async (req, res) => {
       message: `${error}`
     });
   }
+});
+
+app.get('/qr/create', async (req, res) => {
+  const {query} = req;
+  const {data, size} = query;
+
+  const searchParams = {};
+  if (!data) {
+    res.send({
+      error: 'data field missing'
+    });
+  }
+
+  searchParams.data = data;
+  if (size) {
+    searchParams.size = size;
+  }
+
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?${new URLSearchParams(searchParams)}`;
+  return res.status(200).send({
+    message: 'ok',
+    qrUrl
+  });
 });
 
 app.listen(8888, () => {
