@@ -34,6 +34,10 @@ const spotifyApi = new SpotifyWebApi({
 const app = express();
 app.use(logger('dev'));
 
+app.get('/', (req, res) => {
+  res.send(':)');
+});
+
 app.get('/login', (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
@@ -75,7 +79,6 @@ app.get('/callback', async (req, res) => {
             
       spotifyApi.setAccessToken(access_token);
     }, expires_in / 2 * 1000);
-
   } catch (error) {
     console.error('Error getting Tokens:', error);
     res.send(`Error getting Tokens: ${error}`);
@@ -88,7 +91,7 @@ app.get('/me', async (req, res) => {
     const {body} = response;
     return res.status(200).send(body);
   } catch {
-    return res.send('Please login first')
+    return res.send('Please login first');
   }
 });
 
