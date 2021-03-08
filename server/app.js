@@ -129,6 +129,20 @@ app.get('/play', async (req, res) => {
   }
 });
 
+app.get('/play/track/:track_id', async (req, res) => {
+  try {
+    const {params} = req;
+    spotifyApi.play({
+      uris: [`spotify:track:${params.track_id}`]
+    })
+    return res.status(200).send({
+      message: 'ok'
+    })
+  } catch {
+    return res.send('Error');
+  }
+});
+
 app.get('/pause', async (req, res) => {
   try {
     spotifyApi.pause();
