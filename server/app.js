@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const logger = require('morgan');
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const scopes = [
@@ -31,6 +32,7 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const app = express();
+app.use(logger('dev'));
 
 app.get('/login', (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
@@ -55,13 +57,15 @@ app.get('/callback', async (req, res) => {
     spotifyApi.setAccessToken(access_token);
     spotifyApi.setRefreshToken(refresh_token);
 
-    console.log('access_token:', access_token);
-    console.log('refresh_token:', refresh_token);
+    // console.log('access_token:', access_token);
+    // console.log('refresh_token:', refresh_token);
 
-    console.log(`Access token retrieved. Expires in ${expires_in} seconds.`);    
+    // console.log(`Access token retrieved. Expires in ${expires_in} seconds.`);
+
     res.send('Success! You can now close the window.');
 
     setInterval(async () => {
+      console.log('Add refresh token scheduler');
       const data = await spotifyApi.refreshAccessToken();
       const {body} = data;
       const {access_token} = body;
@@ -85,6 +89,17 @@ app.get('/me', async (req, res) => {
     return res.status(200).send(body);
   } catch {
     return res.send('Please login first')
+  }
+});
+
+app.get('/devices', async (req, res) => {
+  try {
+    const response = await spotifyApi.getMyDevices()
+    const {body} = response;
+    const {devices} = body;
+    return res.status(200).send({devices});
+  } catch {
+    return res.send('Error');
   }
 });
 
