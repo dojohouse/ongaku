@@ -106,6 +106,18 @@ app.get('/devices', async (req, res) => {
   }
 });
 
+app.get('/now', async (req, res) => {
+  try {
+    const response = await spotifyApi.getMyCurrentPlayingTrack();
+    const {body} = response;
+    return res.status(200).send({
+      currentlyPlaying: body
+    });
+  } catch {
+    return res.send('Error');
+  }
+});
+
 app.listen(8888, () => {
   console.log('Ongaku server up. Now go to http://localhost:8888/login in your browser.');
 });  
