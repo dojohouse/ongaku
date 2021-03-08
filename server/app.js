@@ -49,8 +49,9 @@ app.get('/callback', async (req, res) => {
 
   if (error) {
     console.error('Callback Error:', error);
-    res.send(`Callback Error: ${error}`);
-    return;
+    return res.send({
+      message: `${error}`
+    });
   }
   
   try {
@@ -80,8 +81,9 @@ app.get('/callback', async (req, res) => {
       spotifyApi.setAccessToken(access_token);
     }, expires_in / 2 * 1000);
   } catch (error) {
-    console.error('Error getting Tokens:', error);
-    res.send(`Error getting Tokens: ${error}`);
+    return res.send({
+      message: `${error}`
+    });
   }
 });
   
@@ -90,8 +92,10 @@ app.get('/me', async (req, res) => {
     const response = await spotifyApi.getMe();
     const {body} = response;
     return res.status(200).send(body);
-  } catch {
-    return res.send('Please login first');
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
   }
 });
 
@@ -101,8 +105,10 @@ app.get('/devices', async (req, res) => {
     const {body} = response;
     const {devices} = body;
     return res.status(200).send({devices});
-  } catch {
-    return res.send('Error');
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
   }
 });
 
@@ -113,44 +119,52 @@ app.get('/now', async (req, res) => {
     return res.status(200).send({
       currentlyPlaying: body
     });
-  } catch {
-    return res.send('Error');
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
   }
 });
 
 app.get('/play', async (req, res) => {
   try {
-    spotifyApi.play();
+    await spotifyApi.play();
     return res.status(200).send({
       message: 'ok'
     });
-  } catch {
-    return res.send('Error');
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
   }
 });
 
 app.get('/play/track/:track_id', async (req, res) => {
   try {
     const {params} = req;
-    spotifyApi.play({
+    await spotifyApi.play({
       uris: [`spotify:track:${params.track_id}`]
     })
     return res.status(200).send({
       message: 'ok'
     })
-  } catch {
-    return res.send('Error');
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
   }
 });
 
 app.get('/pause', async (req, res) => {
   try {
-    spotifyApi.pause();
+    await spotifyApi.pause();
     return res.status(200).send({
       message: 'ok'
     });
-  } catch {
-    return res.send('Error');
+  } catch (error) {
+    return res.send({
+      message: `${error}`
+    });
   }
 });
 
