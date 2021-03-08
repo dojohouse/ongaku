@@ -67,7 +67,9 @@ app.get('/callback', async (req, res) => {
 
     // console.log(`Access token retrieved. Expires in ${expires_in} seconds.`);
 
-    res.send('Success! You can now close the window.');
+    res.send({
+      message: 'ok'
+    });
 
     setInterval(async () => {
       console.log('Add refresh token scheduler');
