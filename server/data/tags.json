@@ -1,0 +1,17 @@
+[
+  {
+    "tag_id": "9463efa8-57ca-4615-a04b-b01334669532",
+    "music_id": "spotify:track:2qxmye6gAegTMjLKEBoR3d",
+    "platform": "spotify"
+  },
+  {
+    "tag_id": "fead5713-e179-4570-886b-eac33eea714d",
+    "music_id": "spotify:album:1ATL5GLyefJaxhQzSPVrLX",
+    "platform": "spotify"
+  },
+  {
+    "tag_id": "54244941-35fc-4c88-9484-2a51e3ebdb67",
+    "music_id": "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF",
+    "platform": "spotify"
+  }
+]
