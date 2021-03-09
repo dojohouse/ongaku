@@ -164,6 +164,22 @@ const getPlayAlbum = async (req, res) => {
   }
 };
 
+const getPlayPlaylist = async (req, res) => {
+  try {
+    const { params } = req;
+    await spotifyApi.play({
+      context_uri: `spotify:playlist:${params.playlist_id}`,
+    });
+    return res.status(200).send({
+      message: 'ok',
+    });
+  } catch (error) {
+    return res.send({
+      message: `${error}`,
+    });
+  }
+};
+
 const getPause = async (req, res) => {
   try {
     await spotifyApi.pause();
@@ -213,6 +229,7 @@ module.exports = {
   getPlay,
   getPlayTrack,
   getPlayAlbum,
+  getPlayPlaylist,
   getPause,
   getSearch,
   getSearchTrack,
