@@ -7,8 +7,13 @@ Personal Vinyl Record Player  :notes:
 - Every Music Card is linked to a Spotify song, playlist, or album
   - With QR technology or NFC Tags
 
-
 *Inspired* by [Spotify Vinyl Emulator](https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-3be63d)
+
+![ongaku-play](./docs/ongaku-play.png)
+
+#### Notes
+- Use a NFC writer to save `url` in NFC cards 
+- Use a QR generator to create a QR code with `url` information
 
 ## Server
 
