@@ -14,6 +14,8 @@ Personal Vinyl Record Player  :notes:
 #### Notes
 - Use a NFC writer to save `url` in NFC cards 
 - Use a QR generator to create a QR code with `url` information
+- Tag Entries are created in the `/server/data/tags.json`
+  - Edit Tag Entries through the web interface
 
 ## Server
 
