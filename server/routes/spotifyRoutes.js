@@ -9,6 +9,8 @@ router.get('/devices', spotifyController.getDevices);
 router.get('/now', spotifyController.getNow);
 router.get('/play', spotifyController.getPlay);
 router.get('/play/track/:track_id', spotifyController.getPlayTrack);
+router.get('/play/album/:album_id', spotifyController.getPlayAlbum);
+router.get('/play/playlist/:playlist_id', spotifyController.getPlayPlaylist);
 router.get('/pause', spotifyController.getPause);
 router.get('/search', spotifyController.getSearch);
 router.get('/search/tracks', spotifyController.getSearchTrack);
