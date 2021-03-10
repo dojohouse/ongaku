@@ -21,7 +21,19 @@ const getTag = async (req, res) => {
   });
 }
 
+const createTag = async (req, res) => {
+  const connection = await createConnection();
+  const repository = await connection.getRepository('tags');
+  const tag = await repository.createTag();
+  await repository.save(tag);
+  return res.status(200).send({
+    message: 'ok',
+    tag,
+  });
+}
+
 module.exports = {
   getTags,
   getTag,
+  createTag,
 };
