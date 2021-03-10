@@ -27,13 +27,23 @@ class TagRepository {
 
   async findById(id) {
     const tags = await this.find();
-    return tags.filter((tag) => tag.tag_id === id);
+    const tag = tags.filter((tag) => tag.tag_id === id);
+    return tag.length === 1 ? tag[0] : {};
   }
 
   async save(tag) {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
     const tags = JSON.parse(response.toString());
-    tags.push(tag);
+    const index = tags.findIndex(t => t.tag_id === tag.tag_id);
+
+    // Add new tag or modify existing
+    if (index < 0) {
+      tags.push(tag);
+    } else {
+      tags[index].music_id = tag.music_id || tags[index].music_id;
+      tags[index].platform = tag.platform || tags[index].platform;
+    }
+
     await fs.promises.writeFile(TAGS_COLLECTION, JSON.stringify(tags, null, 2));
   }
 }
