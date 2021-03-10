@@ -6,6 +6,7 @@ const spotifyRoutes = require('./routes/spotifyRoutes');
 const qrRoutes = require('./routes/qrRoutes');
 
 const app = express();
+app.use(express.json());
 app.use(logger('dev'));
 
 app.get('/', (req, res) => {
