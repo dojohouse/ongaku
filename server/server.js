@@ -1,6 +1,6 @@
 const app = require('./app');
 
-app.listen(8888, () => {
+const server = app.listen(8888, () => {
   console.log(
     'Ongaku server up. Now go to http://localhost:8888/api/spotify/login in your browser.',
   );
