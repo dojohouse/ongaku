@@ -22,7 +22,7 @@ class TagRepository {
 
   async find() {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
-    return JSON.parse(response.toString())
+    return JSON.parse(response.toString());
   }
 
   async findById(id) {
@@ -34,7 +34,7 @@ class TagRepository {
   async save(tag) {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
     const tags = JSON.parse(response.toString());
-    const index = tags.findIndex(t => t.tag_id === tag.tag_id);
+    const index = tags.findIndex((t) => t.tag_id === tag.tag_id);
 
     // Add new tag or modify existing
     if (index < 0) {
@@ -57,7 +57,7 @@ class Connection {
   }
 }
 
-const createConnection = async() => {
+const createConnection = async () => {
   return new Connection();
 };
 

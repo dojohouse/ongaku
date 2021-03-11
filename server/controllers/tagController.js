@@ -19,7 +19,7 @@ const getTag = async (req, res) => {
     message: 'ok',
     tag,
   });
-}
+};
 
 const postTag = async (req, res) => {
   const connection = await createConnection();
@@ -30,7 +30,7 @@ const postTag = async (req, res) => {
     message: 'ok',
     tag,
   });
-}
+};
 
 const patchTag = async (req, res) => {
   const { params, body } = req;
@@ -42,8 +42,8 @@ const patchTag = async (req, res) => {
     return res.status(404).send({
       message: 'tag not found',
       tag: null,
-    })
-  };
+    });
+  }
 
   if (body.music_id) {
     tag.music_id = body.music_id;
@@ -58,7 +58,7 @@ const patchTag = async (req, res) => {
     message: 'ok',
     tag,
   });
-}
+};
 
 module.exports = {
   getTags,
