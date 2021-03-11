@@ -3,7 +3,6 @@ const getSpotifyPlayer = require('../utils/getSpotifyPlayer');
 const spotifyPlayer = getSpotifyPlayer();
 
 const getSpotifyLogin = async (req, res) => {
-  console.log(spotifyPlayer);
   res.redirect(spotifyPlayer.login());
 };
 
@@ -18,7 +17,6 @@ const getSpotifyCallback = async (req, res) => {
     });
   }
 
-  const spotifyPlayer = getSpotifyPlayer();
   await spotifyPlayer.callback(code);
 
   return res.send({

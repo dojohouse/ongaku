@@ -38,9 +38,6 @@ class SpotifyApi {
   static getInstance() {
     if (!this._instance) {
       this._instance = new SpotifyApi();      
-      console.log(`[SpotifyApi]`);
-      console.log(this._instance);      
-      console.log(SpotifyApi.login);
     }
     return this._instance;
   }
