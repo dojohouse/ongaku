@@ -28,7 +28,7 @@ class TagRepository {
   async findById(id) {
     const tags = await this.find();
     const tag = tags.filter((tag) => tag.tag_id === id);
-    return tag.length === 1 ? tag[0] : {};
+    return tag.length === 1 ? tag[0] : null;
   }
 
   async save(tag) {

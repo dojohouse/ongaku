@@ -38,9 +38,12 @@ const patchTag = async (req, res) => {
   const repository = await connection.getRepository('tags');
   const tag = await repository.findById(params.id);
 
-  if (!tag.tag_id) {
-    tag.tag_id = uuidv4();
-  }
+  if (!tag) {
+    return res.status(404).send({
+      message: 'tag not found',
+      tag: null,
+    })
+  };
 
   if (body.music_id) {
     tag.music_id = body.music_id;
