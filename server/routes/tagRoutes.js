@@ -6,5 +6,6 @@ router.get('/tags', tagController.getTags);
 router.post('/tag', tagController.postTag);
 router.get('/tag/:id', tagController.getTag);
 router.patch('/tag/:id', tagController.patchTag);
+router.delete('/tag/:id', tagController.deleteTag);
 
 module.exports = router;

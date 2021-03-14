@@ -33,3 +33,9 @@ export const patchTag = async (modifyTag: Tag): Promise<Tag> => {
 
   return response.data.tag
 }
+
+export const deleteTag = async (deleteTag: Tag): Promise<Tag[]> => {
+  const response = await client.delete(`/tag/${deleteTag.tagId}`)
+
+  return response.data.tags
+}

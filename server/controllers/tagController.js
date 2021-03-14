@@ -41,8 +41,7 @@ const patchTag = async (req, res) => {
   const tag = await repository.findById(params.id);
   if (!tag) {
     return res.status(404).send({
-      message: 'tag not found',
-      tag: null,
+      error: 'tag not found'
     });
   }
 
@@ -66,9 +65,29 @@ const patchTag = async (req, res) => {
   });
 };
 
+const deleteTag = async (req, res) => {
+  const { params } = req;
+  const connection = await createConnection();
+  const repository = await connection.getRepository('tags');
+  try {
+    await repository.delete(params.id);
+    const tags = await repository.find();
+    console.log("Deleted: " + params.id)
+    return res.status(200).send({
+      message: 'ok',
+      tags,
+    });
+  } catch (e) {
+    return res.status(404).send({
+      error: `${e.message}`
+    });
+  }
+};
+
 module.exports = {
   getTags,
   getTag,
   postTag,
   patchTag,
+  deleteTag,
 };

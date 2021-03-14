@@ -16,9 +16,9 @@ class TagRepository {
     }
     return {
       tagId: properties.tagId || uuidv4(),
-      title:  properties.title || '',
-      musicId:  properties.musicId || '',
-      platform:  properties.platform || '',
+      title: properties.title || '',
+      musicId: properties.musicId || '',
+      platform: properties.platform || '',
     }
   }
 
@@ -48,6 +48,17 @@ class TagRepository {
     }
 
     await fs.promises.writeFile(TAGS_COLLECTION, JSON.stringify(tags, null, 2));
+  }
+
+  async delete(tagId) {
+    const response = await fs.promises.readFile(TAGS_COLLECTION);
+    const tags = JSON.parse(response.toString());
+    const removeDeleteTagInList = tags.filter(t => t.tagId !== tagId)
+    if (tags.length === removeDeleteTagInList.length) {
+      throw Error("Invalid Tag Id.");
+    }
+
+    await fs.promises.writeFile(TAGS_COLLECTION, JSON.stringify(removeDeleteTagInList, null, 2));
   }
 }
 
