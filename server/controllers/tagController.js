@@ -27,7 +27,7 @@ const postTag = async (req, res) => {
   const repository = await connection.getRepository('tags');
   const tag = await repository.createTag(body);
   await repository.save(tag);
-  console.log("Saved: " + JSON.stringify(tag));
+  console.log('Saved: ' + JSON.stringify(tag));
   return res.status(200).send({
     message: 'ok',
     tag,
@@ -41,7 +41,7 @@ const patchTag = async (req, res) => {
   const tag = await repository.findById(params.id);
   if (!tag) {
     return res.status(404).send({
-      error: 'tag not found'
+      error: 'tag not found',
     });
   }
 
@@ -58,7 +58,7 @@ const patchTag = async (req, res) => {
   }
 
   await repository.save(tag);
-  console.log("Update: " + JSON.stringify(tag));
+  console.log('Update: ' + JSON.stringify(tag));
   return res.status(200).send({
     message: 'ok',
     tag,
@@ -72,14 +72,14 @@ const deleteTag = async (req, res) => {
   try {
     await repository.delete(params.id);
     const tags = await repository.find();
-    console.log("Deleted: " + params.id)
+    console.log('Deleted: ' + params.id);
     return res.status(200).send({
       message: 'ok',
       tags,
     });
   } catch (e) {
     return res.status(404).send({
-      error: `${e.message}`
+      error: `${e.message}`,
     });
   }
 };

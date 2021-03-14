@@ -7,12 +7,12 @@ module.exports = {
         center: true,
       },
       fontSize: {
-        xxs: '0.65rem'
-      }
+        xxs: '0.65rem',
+      },
     },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};

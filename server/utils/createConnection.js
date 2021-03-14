@@ -19,7 +19,7 @@ class TagRepository {
       title: properties.title || '',
       musicId: properties.musicId || '',
       platform: properties.platform || '',
-    }
+    };
   }
 
   async find() {
@@ -53,12 +53,15 @@ class TagRepository {
   async delete(tagId) {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
     const tags = JSON.parse(response.toString());
-    const removeDeleteTagInList = tags.filter(t => t.tagId !== tagId)
+    const removeDeleteTagInList = tags.filter((t) => t.tagId !== tagId);
     if (tags.length === removeDeleteTagInList.length) {
-      throw Error("Invalid Tag Id.");
+      throw Error('Invalid Tag Id.');
     }
 
-    await fs.promises.writeFile(TAGS_COLLECTION, JSON.stringify(removeDeleteTagInList, null, 2));
+    await fs.promises.writeFile(
+      TAGS_COLLECTION,
+      JSON.stringify(removeDeleteTagInList, null, 2),
+    );
   }
 }
 
