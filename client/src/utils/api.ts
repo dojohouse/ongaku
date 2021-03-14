@@ -27,3 +27,9 @@ export const postTag = async (newTag: Tag): Promise<Tag> => {
 
   return response.data.tag
 }
+
+export const patchTag = async (modifyTag: Tag): Promise<Tag> => {
+  const response = await client.patch(`/tag/${modifyTag.tagId}`, modifyTag)
+
+  return response.data.tag
+}

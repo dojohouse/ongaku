@@ -1,16 +1,16 @@
 import React from 'react';
 
 interface EmptyTagCardProps {
-  addNewHandler: Function
+  onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
 const TagCard: React.FC<EmptyTagCardProps> = (props: EmptyTagCardProps) => {
-  const { addNewHandler } = props;
+  const { onClick = undefined } = props;
 
   return (
     <div
       className="flex items-center justify-center p-3 rounded-md bg-gray-100 m-2 max-w-60 w-60 shadow-inner text-center ring-gray-600 ring-4 ring-opacity-50 cursor-pointer"
-      onClick={() => addNewHandler(true)}
+      onClick={onClick}
     >
       <div>
         <div className="flex justify-center">
