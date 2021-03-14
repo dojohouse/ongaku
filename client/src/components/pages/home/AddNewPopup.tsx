@@ -54,6 +54,12 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
               setNewTag({ ...newTag, musicId: event.target.value })
             }
           />
+          <div className="text-xxs">
+            <mark className="bg-gray-200">
+              Open Spotify → ••• (next to song/playlist) → Share → Copy Spotify
+              URI
+            </mark>
+          </div>
           <Input
             className="py-2"
             label="Tag Id (optional)"
