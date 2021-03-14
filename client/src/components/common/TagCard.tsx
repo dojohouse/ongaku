@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag } from '../models';
+import { Tag } from '../../models';
 
 interface TagCardProps {
   tag: Tag;
