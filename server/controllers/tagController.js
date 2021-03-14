@@ -22,10 +22,12 @@ const getTag = async (req, res) => {
 };
 
 const postTag = async (req, res) => {
+  const { body } = req;
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
-  const tag = await repository.createTag();
+  const tag = await repository.createTag(body);
   await repository.save(tag);
+  console.log("Saved:" + JSON.stringify(tag));
   return res.status(200).send({
     message: 'ok',
     tag,
@@ -45,8 +47,8 @@ const patchTag = async (req, res) => {
     });
   }
 
-  if (body.music_id) {
-    tag.music_id = body.music_id;
+  if (body.musicId) {
+    tag.musicId = body.musicId;
   }
 
   if (body.platform) {

@@ -67,14 +67,14 @@ class SpotifyApi {
   }
 
   play = async (tag) => {
-    if (tag.music_id.includes('track')) {      
+    if (tag.musicId.includes('track')) {      
       return this._proxy.play({
-        uris: [tag.music_id],
+        uris: [tag.musicId],
       });
     } 
     
     return this._proxy.play({
-      context_uri: tag.music_id,
+      context_uri: tag.musicId,
     });
   }
 }
