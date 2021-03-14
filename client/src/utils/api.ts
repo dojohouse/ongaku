@@ -39,3 +39,9 @@ export const deleteTag = async (deleteTag: Tag): Promise<Tag[]> => {
 
   return response.data.tags;
 };
+
+export const playMusic = async (tag: Tag): Promise<void> => {
+  const response = await client.get(`/music/play/${tag.tagId}`);
+
+  return response.data;
+};

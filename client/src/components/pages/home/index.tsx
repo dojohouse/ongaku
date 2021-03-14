@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Tag } from '../../../models';
-import { getTags, postTag, patchTag, deleteTag } from '../../../utils/api';
+import {
+  getTags,
+  postTag,
+  patchTag,
+  deleteTag,
+  playMusic,
+} from '../../../utils/api';
 import { TagCard, EmptyTagCard } from '../../common';
 import { defaultTag } from '../../../utils/helpers';
 import AddNewPopup from './AddNewPopup';
@@ -83,6 +89,14 @@ const Home: React.FC = () => {
     }
   };
 
+  const onClickPlayHandler = async (tag: Tag): Promise<void> => {
+    try {
+      await playMusic(tag);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="lg:container mx-20 my-20">
       <div className="pl-2 py-5 mx-20 mb-10">
@@ -93,6 +107,7 @@ const Home: React.FC = () => {
         {tags.map((tag, index) => (
           <TagCard
             onClick={() => [setOpenModifyTag(true), setModifyTag(tag)]}
+            onClickPlay={onClickPlayHandler}
             key={index}
             tag={tag}
             color={getColor(index)}
