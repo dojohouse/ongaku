@@ -24,6 +24,9 @@
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix"
   },
+  "nodemonConfig": {
+    "ignore": ["/data/*.json"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chriskfwoo/ongaku.git"
