@@ -17,8 +17,14 @@ const getSpotifyCallback = async (req, res) => {
     });
   }
 
-  await spotifyPlayer.callback(code);
-
+  try {
+    await spotifyPlayer.callback(code);
+  } catch (e) {
+    return res.status(400).send({
+      error: `${e}`,
+    });
+  }
+ 
   return res.send({
     message: 'ok',
   });

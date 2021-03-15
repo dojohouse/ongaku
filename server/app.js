@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
+const cors = require('cors');
 const tagRoutes = require('./routes/tagRoutes');
 const spotifyRoutes = require('./routes/spotifyRoutes');
 const qrRoutes = require('./routes/qrRoutes');
@@ -8,6 +9,7 @@ const musicRoutes = require('./routes/musicRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(logger('dev'));
 

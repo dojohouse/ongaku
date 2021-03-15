@@ -6,18 +6,20 @@ const TAGS_COLLECTION = './data/tags.json';
 
 class TagRepository {
   async createTag(properties) {
-    const tag = {};
-    tag.tag_id = uuidv4();
-    tag.music_id = '';
-    tag.platform = '';
-
     if (!properties) {
-      return tag;
+      return {
+        tagId: uuidv4(),
+        title: '',
+        musicId: '',
+        platform: '',
+      };
     }
-
-    tag.music_id = properties.music_id || '';
-    tag.platform = properties.platform || '';
-    return tag;
+    return {
+      tagId: properties.tagId || uuidv4(),
+      title: properties.title || '',
+      musicId: properties.musicId || '',
+      platform: properties.platform || '',
+    };
   }
 
   async find() {
@@ -27,24 +29,39 @@ class TagRepository {
 
   async findById(id) {
     const tags = await this.find();
-    const tag = tags.filter((tag) => tag.tag_id === id);
+    const tag = tags.filter((tag) => tag.tagId === id);
     return tag.length === 1 ? tag[0] : null;
   }
 
   async save(tag) {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
     const tags = JSON.parse(response.toString());
-    const index = tags.findIndex((t) => t.tag_id === tag.tag_id);
+    const index = tags.findIndex((t) => t.tagId === tag.tagId);
 
     // Add new tag or modify existing
     if (index < 0) {
       tags.push(tag);
     } else {
-      tags[index].music_id = tag.music_id || tags[index].music_id;
+      tags[index].musicId = tag.musicId || tags[index].musicId;
       tags[index].platform = tag.platform || tags[index].platform;
+      tags[index].title = tag.title || tags[index].title;
     }
 
     await fs.promises.writeFile(TAGS_COLLECTION, JSON.stringify(tags, null, 2));
+  }
+
+  async delete(tagId) {
+    const response = await fs.promises.readFile(TAGS_COLLECTION);
+    const tags = JSON.parse(response.toString());
+    const removeDeleteTagInList = tags.filter((t) => t.tagId !== tagId);
+    if (tags.length === removeDeleteTagInList.length) {
+      throw Error('Invalid Tag Id.');
+    }
+
+    await fs.promises.writeFile(
+      TAGS_COLLECTION,
+      JSON.stringify(removeDeleteTagInList, null, 2),
+    );
   }
 }
 

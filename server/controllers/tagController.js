@@ -22,10 +22,12 @@ const getTag = async (req, res) => {
 };
 
 const postTag = async (req, res) => {
+  const { body } = req;
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
-  const tag = await repository.createTag();
+  const tag = await repository.createTag(body);
   await repository.save(tag);
+  console.log('Saved: ' + JSON.stringify(tag));
   return res.status(200).send({
     message: 'ok',
     tag,
@@ -37,16 +39,18 @@ const patchTag = async (req, res) => {
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
   const tag = await repository.findById(params.id);
-
   if (!tag) {
     return res.status(404).send({
-      message: 'tag not found',
-      tag: null,
+      error: 'tag not found',
     });
   }
 
-  if (body.music_id) {
-    tag.music_id = body.music_id;
+  if (body.title) {
+    tag.title = body.title;
+  }
+
+  if (body.musicId) {
+    tag.musicId = body.musicId;
   }
 
   if (body.platform) {
@@ -54,10 +58,30 @@ const patchTag = async (req, res) => {
   }
 
   await repository.save(tag);
+  console.log('Update: ' + JSON.stringify(tag));
   return res.status(200).send({
     message: 'ok',
     tag,
   });
+};
+
+const deleteTag = async (req, res) => {
+  const { params } = req;
+  const connection = await createConnection();
+  const repository = await connection.getRepository('tags');
+  try {
+    await repository.delete(params.id);
+    const tags = await repository.find();
+    console.log('Deleted: ' + params.id);
+    return res.status(200).send({
+      message: 'ok',
+      tags,
+    });
+  } catch (e) {
+    return res.status(404).send({
+      error: `${e.message}`,
+    });
+  }
 };
 
 module.exports = {
@@ -65,4 +89,5 @@ module.exports = {
   getTag,
   postTag,
   patchTag,
+  deleteTag,
 };

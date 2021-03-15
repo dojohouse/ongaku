@@ -9,6 +9,12 @@ const getPlay = async (req, res) => {
   const repository = await connection.getRepository('tags');
   const tag = await repository.findById(params.tagId);
 
+  if (!tag) {
+    return res.status(400).send({
+      error: `Tag Id not found.`,
+    });
+  }
+
   const { platform } = tag;
 
   if (platform === 'spotify') {

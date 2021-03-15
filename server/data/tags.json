@@ -1,17 +1,26 @@
 [
   {
-    "tag_id": "9463efa8-57ca-4615-a04b-b01334669532",
-    "music_id": "spotify:track:2qxmye6gAegTMjLKEBoR3d",
-    "platform": "spotify"
+    "tagId": "9463efa8-57ca-4615-a04b-b01334669532",
+    "musicId": "spotify:track:2qxmye6gAegTMjLKEBoR3d",
+    "platform": "spotify",
+    "title": "Alec Benjamin - Let Me Down Slowly"
   },
   {
-    "tag_id": "fead5713-e179-4570-886b-eac33eea714d",
-    "music_id": "spotify:album:1ATL5GLyefJaxhQzSPVrLX",
-    "platform": "spotify"
+    "tagId": "fead5713-e179-4570-886b-eac33eea714d",
+    "musicId": "spotify:album:1ATL5GLyefJaxhQzSPVrLX",
+    "platform": "spotify",
+    "title": "Drake - Scorpion"
   },
   {
-    "tag_id": "54244941-35fc-4c88-9484-2a51e3ebdb67",
-    "music_id": "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF",
+    "tagId": "54244941-35fc-4c88-9484-2a51e3ebdb67",
+    "musicId": "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF",
+    "platform": "spotify",
+    "title": "Top 50 - Global"
+  },
+  {
+    "tagId": "b84f87ff-d37c-4e46-af43-9f7a3fc50584",
+    "title": "Oasis - Wonderwall",
+    "musicId": "spotify:track:1qPbGZqppFwLwcBC1JQ6Vr",
     "platform": "spotify"
   }
 ]
