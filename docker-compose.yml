@@ -7,8 +7,10 @@ services:
       - 8888:8888
     volumes:
       - ./server/data:/ongaku/server/data:rw
+    env_file: .env
   client:
     build: client
     container_name: ongaku_client
     ports:
       - 3000:3000
+    env_file: .env

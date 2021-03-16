@@ -17,9 +17,9 @@ Personal Vinyl Record Player  :notes:
 - Tag Entries are created in the `/server/data/tags.json`
   - Edit Tag Entries through the web interface
 
-## Server
+## Getting Started
 
-### Getting Started
+### Setup Spotify Account
 
 1. Login on `https://developer.spotify.com/dashboard/login` to setup your developer credentials
 
@@ -27,19 +27,32 @@ Personal Vinyl Record Player  :notes:
 
 3. Go to `Edit Settings`
 
-4. Add `http://localhost:8888/api/spotify/callback` in `Redirect URIs` section
+4. Add `http://[server_host]:[server_port]/api/spotify/callback` in `Redirect URIs` section
 
-5. Create a copy `.env.config` to `.env`
+
+### Setup .env config
+
+5. Create a copy `.env.template` to `.env`
     ```sh
-    cp .env.config .env
+    cp .env.template .env
     ```
 
 6. Copy `Client ID` & `Client Secret` to `.env`
     ```sh
-    # Credentials
+    # Server
     client_id='[your-client-id]'
     client_secret='[your-client-secret]'
-    redirect_uri='http://localhost:8888/api/spotify/callback'
+    redirect_uri='http://[server_host]:[server_port]/api/spotify/callback'
     ```
 
-7. Install the project with `npm install` and run application with `npm run start`
+**NOTE**: If your not using docker, setup `.env` in both **server** and **client**
+
+### Installation
+
+- With Docker
+
+`docker-compose up --build`
+
+- Without Docker
+  - In both **server** and **client**
+    - Install dependencies `npm install`, and run both application with `npm run start`
