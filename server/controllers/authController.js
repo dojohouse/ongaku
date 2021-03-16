@@ -1,4 +1,4 @@
-const getSpotifyPlayer = require('../utils/getSpotifyPlayer');
+const getSpotifyPlayer = require('../utils/getSpotifyPlayer').default;
 
 const spotifyPlayer = getSpotifyPlayer();
 
