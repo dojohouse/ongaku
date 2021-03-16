@@ -1,7 +1,10 @@
-const createConnection = require('../utils/createConnection');
-const getSpotifyPlayer = require('../utils/getSpotifyPlayer');
+import {Request, Response} from 'express';
+// const createConnection = require('../utils/createConnection');
+// const getSpotifyPlayer = require('../utils/getSpotifyPlayer');
+import createConnection from '../utils/createConnection';
+import getSpotifyPlayer from '../utils/getSpotifyPlayer';
 
-const getPlay = async (req, res) => {
+const getPlay = async (req: Request, res: Response) => {
   const { params } = req;
 
   const spotifyPlayer = getSpotifyPlayer();
