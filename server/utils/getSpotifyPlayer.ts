@@ -82,7 +82,13 @@ class SpotifyApi {
     });
   };
 
-  getDevices = async () => {
+  playDefaultDevice = async (deviceId: string) => {
+    return this._proxy!.play({
+      device_id: deviceId,
+    });
+  };
+
+  getDevices = async (): Promise<SpotifyApi.UserDevice[]> => {
     const data = await this._proxy!.getMyDevices();
     const { body } = data;
     const { devices } = body;
