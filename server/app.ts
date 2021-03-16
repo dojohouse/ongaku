@@ -1,13 +1,14 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
+import {qrRoutes} from './routes';
 const tagRoutes = require('./routes/tagRoutes');
 const spotifyRoutes = require('./routes/spotifyRoutes');
-const qrRoutes = require('./routes/qrRoutes');
 const musicRoutes = require('./routes/musicRoutes');
 const authRoutes = require('./routes/authRoutes');
 
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
