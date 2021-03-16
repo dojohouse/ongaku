@@ -1,11 +1,17 @@
-const fs = require('fs');
-const uuid = require('uuid');
-const uuidv4 = uuid.v4;
+import fs from 'fs';
+import {v4 as uuidv4} from 'uuid';
 
 const TAGS_COLLECTION = './data/tags.json';
 
+interface Tag {
+  tagId: string;
+  title: string;
+  musicId: string;
+  platform: '' | 'spotify';
+}
+
 class TagRepository {
-  async createTag(properties) {
+  async createTag(properties?: Tag): Promise<Tag> {
     if (!properties) {
       return {
         tagId: uuidv4(),
@@ -22,21 +28,21 @@ class TagRepository {
     };
   }
 
-  async find() {
+  async find(): Promise<Tag[]> {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
     return JSON.parse(response.toString());
   }
 
-  async findById(id) {
+  async findById(id: string): Promise<Tag | null> {
     const tags = await this.find();
-    const tag = tags.filter((tag) => tag.tagId === id);
+    const tag = tags.filter((tag: Tag) => tag.tagId === id);
     return tag.length === 1 ? tag[0] : null;
   }
 
-  async save(tag) {
+  async save(tag: Tag): Promise<void> {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
-    const tags = JSON.parse(response.toString());
-    const index = tags.findIndex((t) => t.tagId === tag.tagId);
+    const tags: Tag[] = JSON.parse(response.toString());
+    const index = tags.findIndex((t: Tag) => t.tagId === tag.tagId);
 
     // Add new tag or modify existing
     if (index < 0) {
@@ -50,10 +56,10 @@ class TagRepository {
     await fs.promises.writeFile(TAGS_COLLECTION, JSON.stringify(tags, null, 2));
   }
 
-  async delete(tagId) {
+  async delete(tagId: string): Promise<void> {
     const response = await fs.promises.readFile(TAGS_COLLECTION);
-    const tags = JSON.parse(response.toString());
-    const removeDeleteTagInList = tags.filter((t) => t.tagId !== tagId);
+    const tags: Tag[] = JSON.parse(response.toString());
+    const removeDeleteTagInList = tags.filter((t: Tag) => t.tagId !== tagId);
     if (tags.length === removeDeleteTagInList.length) {
       throw Error('Invalid Tag Id.');
     }
@@ -66,7 +72,7 @@ class TagRepository {
 }
 
 class Connection {
-  async getRepository(name) {
+  async getRepository(name: string) {
     if (name.toLocaleLowerCase() === 'tags') {
       return new TagRepository();
     }
