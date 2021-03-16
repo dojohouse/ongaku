@@ -4,7 +4,6 @@ import logger from 'morgan';
 import cors from 'cors';
 import {qrRoutes} from './routes';
 const tagRoutes = require('./routes/tagRoutes');
-const spotifyRoutes = require('./routes/spotifyRoutes');
 const musicRoutes = require('./routes/musicRoutes');
 const authRoutes = require('./routes/authRoutes');
 
@@ -19,7 +18,6 @@ app.get('/', (_, res) => {
 });
 
 app.use('/api', tagRoutes);
-app.use('/api/spotify', spotifyRoutes);
 app.use('/api/qr', qrRoutes);
 app.use('/api/music', musicRoutes);
 app.use('/api/auth', authRoutes);

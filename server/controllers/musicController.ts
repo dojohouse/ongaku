@@ -1,6 +1,4 @@
 import {Request, Response} from 'express';
-// const createConnection = require('../utils/createConnection');
-// const getSpotifyPlayer = require('../utils/getSpotifyPlayer');
 import createConnection from '../utils/createConnection';
 import getSpotifyPlayer from '../utils/getSpotifyPlayer';
 
