@@ -1,14 +1,8 @@
 import fs from 'fs';
 import {v4 as uuidv4} from 'uuid';
+import { Tag } from '../models';
 
 const TAGS_COLLECTION = './data/tags.json';
-
-interface Tag {
-  tagId: string;
-  title: string;
-  musicId: string;
-  platform: '' | 'spotify';
-}
 
 class TagRepository {
   async createTag(properties?: Tag): Promise<Tag> {
@@ -72,11 +66,11 @@ class TagRepository {
 }
 
 class Connection {
-  async getRepository(name: string) {
+  async getRepository(name: string): Promise<TagRepository> {
     if (name.toLocaleLowerCase() === 'tags') {
       return new TagRepository();
     }
-    return {};
+    throw Error('Invalid repository');
   }
 }
 
@@ -84,4 +78,4 @@ const createConnection = async () => {
   return new Connection();
 };
 
-module.exports = createConnection;
+export default createConnection;
