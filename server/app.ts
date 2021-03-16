@@ -6,6 +6,7 @@ import { authRoutes, musicRoutes, qrRoutes, tagRoutes } from './routes';
 
 dotenv.config();
 const app = express();
+app.set('port', process.env.server_port || 8888);
 app.use(cors());
 app.use(express.json());
 app.use(logger('dev'));

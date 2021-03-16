@@ -32,9 +32,9 @@ Personal Vinyl Record Player  :notes:
 
 ### Setup .env config
 
-5. Create a copy `.env.template` to `.env`
+5. Create a copy `.env.config` to `.env`
     ```sh
-    cp .env.template .env
+    cp .env.config .env
     ```
 
 6. Copy `Client ID` & `Client Secret` to `.env`

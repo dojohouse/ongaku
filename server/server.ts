@@ -1,8 +1,10 @@
 import app from './app';
 
-const server = app.listen(8888, () => {
+const port = app.get('port');
+
+const server = app.listen(port, () => {
   console.log(
-    'Ongaku server up. Now go to http://localhost:8888/api/spotify/login in your browser.',
+    `Ongaku server up. Now go to http://localhost:${port}/api/auth/spotify/login in your browser.`,
   );
 });
 
