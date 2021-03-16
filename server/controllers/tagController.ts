@@ -86,7 +86,7 @@ const deleteTag = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = {
+export {
   getTags,
   getTag,
   postTag,

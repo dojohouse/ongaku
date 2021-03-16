@@ -1,5 +1,11 @@
+import authRoutes from './authRoutes';
+import musicRoutes from './musicRoutes';
 import qrRoutes from './qrRoutes';
+import tagRoutes from './tagRoutes';
 
 export {
-    qrRoutes    
-}
+    authRoutes,
+    musicRoutes,
+    qrRoutes, 
+    tagRoutes
+};

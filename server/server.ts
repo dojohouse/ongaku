@@ -1,4 +1,4 @@
-const app = require('./app');
+import app from './app';
 
 const server = app.listen(8888, () => {
   console.log(

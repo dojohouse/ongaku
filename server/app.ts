@@ -2,10 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import {qrRoutes} from './routes';
-const tagRoutes = require('./routes/tagRoutes');
-const musicRoutes = require('./routes/musicRoutes');
-const authRoutes = require('./routes/authRoutes');
+import {authRoutes, musicRoutes, qrRoutes, tagRoutes} from './routes';
 
 dotenv.config();
 const app = express();
@@ -22,4 +19,4 @@ app.use('/api/qr', qrRoutes);
 app.use('/api/music', musicRoutes);
 app.use('/api/auth', authRoutes);
 
-module.exports = app;
+export default app;

@@ -36,6 +36,6 @@ const getPlay = async (req: Request, res: Response) => {
   });
 };
 
-module.exports = {
+export {
   getPlay,
 };
