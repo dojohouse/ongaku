@@ -1,7 +1,7 @@
 require('dotenv').config();
-const express = require('express');
-const logger = require('morgan');
-const cors = require('cors');
+import express from 'express';
+import logger from 'morgan';
+import cors from 'cors';
 const tagRoutes = require('./routes/tagRoutes');
 const spotifyRoutes = require('./routes/spotifyRoutes');
 const qrRoutes = require('./routes/qrRoutes');
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(logger('dev'));
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send(':)');
 });
 
