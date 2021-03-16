@@ -36,4 +36,20 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
   });
 };
 
-export { getPlay };
+const getDevices = async (_: Request, res: Response): Promise<Response> => {
+  try {
+    const spotifyPlayer = getSpotifyPlayer();
+    const devices = await spotifyPlayer.getDevices();
+    console.log(devices);
+    return res.status(200).send({
+      message: 'ok',
+      devices,
+    });
+  } catch (e) {
+    return res.status(500).send({
+      error: `${e}`,
+    });
+  }
+};
+
+export { getPlay, getDevices };
