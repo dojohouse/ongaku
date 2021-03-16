@@ -1,4 +1,4 @@
-const app = require('./app');
+import app from './app';
 
 const server = app.listen(8888, () => {
   console.log(
@@ -6,7 +6,7 @@ const server = app.listen(8888, () => {
   );
 });
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', (err: any) => {
   console.log('UNHANDLED REJECTION!!!  shutting down ...');
   console.log(err.name, err.message);
   server.close(() => {
