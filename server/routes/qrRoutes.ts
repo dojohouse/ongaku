@@ -1,5 +1,5 @@
-import {Router} from 'express';
-import {getCreate} from '../controllers/qrController';
+import { Router } from 'express';
+import { getCreate } from '../controllers/qrController';
 
 const router = Router();
 

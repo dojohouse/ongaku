@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 const BASE_URL = 'https://api.qrserver.com/v1/create-qr-code';
 
 interface qrSearchParams {
@@ -6,7 +6,7 @@ interface qrSearchParams {
   size?: string;
 }
 
-const getCreate = async (req: Request, res: Response) => {
+const getCreate = async (req: Request, res: Response): Promise<Response> => {
   const { query } = req;
   const { data, size } = query;
 
@@ -23,13 +23,13 @@ const getCreate = async (req: Request, res: Response) => {
     searchParams.size = size as string;
   }
 
-  const qrUrl = `${BASE_URL}/?${new URLSearchParams(searchParams as string[][])}`;
+  const qrUrl = `${BASE_URL}/?${new URLSearchParams(
+    searchParams as string[][],
+  )}`;
   return res.status(200).send({
     message: 'ok',
     qrUrl,
   });
 };
 
-export {
-  getCreate
-};
+export { getCreate };

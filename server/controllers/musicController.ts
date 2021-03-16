@@ -1,8 +1,8 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import createConnection from '../utils/createConnection';
 import getSpotifyPlayer from '../utils/getSpotifyPlayer';
 
-const getPlay = async (req: Request, res: Response) => {
+const getPlay = async (req: Request, res: Response): Promise<Response> => {
   const { params } = req;
 
   const spotifyPlayer = getSpotifyPlayer();
@@ -36,6 +36,4 @@ const getPlay = async (req: Request, res: Response) => {
   });
 };
 
-export {
-  getPlay,
-};
+export { getPlay };

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Tag } from '../models';
 
 const TAGS_COLLECTION = './data/tags.json';
@@ -74,7 +74,7 @@ class Connection {
   }
 }
 
-const createConnection = async () => {
+const createConnection = async (): Promise<Connection> => {
   return new Connection();
 };
 

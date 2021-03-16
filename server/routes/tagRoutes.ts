@@ -1,5 +1,11 @@
-import {Router} from 'express';
-import {getTags, postTag, getTag, patchTag, deleteTag} from '../controllers/tagController';
+import { Router } from 'express';
+import {
+  getTags,
+  postTag,
+  getTag,
+  patchTag,
+  deleteTag,
+} from '../controllers/tagController';
 
 const router = Router();
 

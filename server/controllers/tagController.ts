@@ -1,8 +1,8 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import { Tag } from '../models';
 import createConnection from '../utils/createConnection';
 
-const getTags = async (req: Request, res: Response) => {
+const getTags = async (req: Request, res: Response): Promise<Response> => {
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
   const tags: Tag[] = await repository.find();
@@ -12,7 +12,7 @@ const getTags = async (req: Request, res: Response) => {
   });
 };
 
-const getTag = async (req: Request, res: Response) => {
+const getTag = async (req: Request, res: Response): Promise<Response> => {
   const { params } = req;
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
@@ -23,7 +23,7 @@ const getTag = async (req: Request, res: Response) => {
   });
 };
 
-const postTag = async (req: Request, res: Response) => {
+const postTag = async (req: Request, res: Response): Promise<Response> => {
   const { body } = req;
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
@@ -36,7 +36,7 @@ const postTag = async (req: Request, res: Response) => {
   });
 };
 
-const patchTag = async (req: Request, res: Response) => {
+const patchTag = async (req: Request, res: Response): Promise<Response> => {
   const { params, body } = req;
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
@@ -67,7 +67,7 @@ const patchTag = async (req: Request, res: Response) => {
   });
 };
 
-const deleteTag = async (req: Request, res: Response) => {
+const deleteTag = async (req: Request, res: Response): Promise<Response> => {
   const { params } = req;
   const connection = await createConnection();
   const repository = await connection.getRepository('tags');
@@ -86,10 +86,4 @@ const deleteTag = async (req: Request, res: Response) => {
   }
 };
 
-export {
-  getTags,
-  getTag,
-  postTag,
-  patchTag,
-  deleteTag,
-};
+export { getTags, getTag, postTag, patchTag, deleteTag };

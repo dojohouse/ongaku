@@ -1,13 +1,17 @@
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import getSpotifyPlayer from '../utils/getSpotifyPlayer';
 
 const spotifyPlayer = getSpotifyPlayer();
 
-const getSpotifyLogin = async (req: Request, res: Response) => {
+// eslint-disable-next-line
+const getSpotifyLogin = async (req: Request, res: Response): Promise<any> => {
   res.redirect(spotifyPlayer.login());
 };
 
-const getSpotifyCallback = async (req: Request, res: Response) => {
+const getSpotifyCallback = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
   const { query } = req;
   const { error, code } = query;
 
@@ -25,13 +29,10 @@ const getSpotifyCallback = async (req: Request, res: Response) => {
       error: `${e}`,
     });
   }
- 
+
   return res.send({
     message: 'ok',
   });
 };
 
-export {
-  getSpotifyLogin,
-  getSpotifyCallback,
-};
+export { getSpotifyLogin, getSpotifyCallback };

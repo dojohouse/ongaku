@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import dotenv from 'dotenv';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { Tag } from '../models';
@@ -40,50 +41,50 @@ class SpotifyApi {
 
   static getInstance() {
     if (!this._instance) {
-      this._instance = new SpotifyApi();      
+      this._instance = new SpotifyApi();
     }
     return this._instance;
   }
 
   login = (): string => {
-    return this._proxy!!.createAuthorizeURL(scopes, '');
-  }
+    return this._proxy!.createAuthorizeURL(scopes, '');
+  };
 
   callback = async (code: string): Promise<void> => {
-    const data = await this._proxy!!.authorizationCodeGrant(code);
+    const data = await this._proxy!.authorizationCodeGrant(code);
     const { body } = data;
     const { access_token, refresh_token, expires_in } = body;
 
-    this._proxy!!.setAccessToken(access_token);
-    this._proxy!!.setRefreshToken(refresh_token);
+    this._proxy!.setAccessToken(access_token);
+    this._proxy!.setRefreshToken(refresh_token);
 
     setInterval(async () => {
-      const data = await this._proxy!!.refreshAccessToken();
+      const data = await this._proxy!.refreshAccessToken();
       const { body } = data;
       const { access_token } = body;
 
       console.log('The access token has been refreshed!');
       console.log(`Access token ${access_token}`);
 
-      this._proxy!!.setAccessToken(access_token);
-    }, (expires_in / 2) * 1000);    
-  }
+      this._proxy!.setAccessToken(access_token);
+    }, (expires_in / 2) * 1000);
+  };
 
   play = async (tag: Tag) => {
-    if (tag.musicId.includes('track')) {      
-      return this._proxy!!.play({
+    if (tag.musicId.includes('track')) {
+      return this._proxy!.play({
         uris: [tag.musicId],
       });
-    } 
-    
-    return this._proxy!!.play({
+    }
+
+    return this._proxy!.play({
       context_uri: tag.musicId,
     });
-  }
+  };
 }
 
-const getSpotifyPlayer = () => {
+const getSpotifyPlayer = (): SpotifyApi => {
   return SpotifyApi.getInstance();
-}
+};
 
 export default getSpotifyPlayer;

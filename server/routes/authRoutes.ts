@@ -1,5 +1,8 @@
-import {Router} from 'express';
-import {getSpotifyLogin, getSpotifyCallback} from '../controllers/authController';
+import { Router } from 'express';
+import {
+  getSpotifyLogin,
+  getSpotifyCallback,
+} from '../controllers/authController';
 
 const router = Router();
 

@@ -6,7 +6,8 @@ const server = app.listen(8888, () => {
   );
 });
 
-process.on('unhandledRejection', (err: any) => {
+// eslint-disable-next-line
+process.on('unhandledRejection', (err: any): void => {
   console.log('UNHANDLED REJECTION!!!  shutting down ...');
   console.log(err.name, err.message);
   server.close(() => {

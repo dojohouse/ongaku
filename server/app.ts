@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import {authRoutes, musicRoutes, qrRoutes, tagRoutes} from './routes';
+import { authRoutes, musicRoutes, qrRoutes, tagRoutes } from './routes';
 
 dotenv.config();
 const app = express();
