@@ -1,12 +1,13 @@
-const getSpotifyPlayer = require('../utils/getSpotifyPlayer').default;
+import {Request, Response} from 'express';
+import getSpotifyPlayer from '../utils/getSpotifyPlayer';
 
 const spotifyPlayer = getSpotifyPlayer();
 
-const getSpotifyLogin = async (req, res) => {
+const getSpotifyLogin = async (req: Request, res: Response) => {
   res.redirect(spotifyPlayer.login());
 };
 
-const getSpotifyCallback = async (req, res) => {
+const getSpotifyCallback = async (req: Request, res: Response) => {
   const { query } = req;
   const { error, code } = query;
 
@@ -18,7 +19,7 @@ const getSpotifyCallback = async (req, res) => {
   }
 
   try {
-    await spotifyPlayer.callback(code);
+    await spotifyPlayer.callback(code as string);
   } catch (e) {
     return res.status(400).send({
       error: `${e}`,
