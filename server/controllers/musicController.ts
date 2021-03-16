@@ -25,7 +25,7 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
   if (platform === 'spotify') {
     try {
       const devices = await spotifyPlayer.getDevices();
-      console.log(devices);
+
       // check if all devices are all in_active
       if (
         devices.length > 0 &&
@@ -37,7 +37,7 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
           defaultDeviceId === '' ? (devices[0].id as string) : defaultDeviceId;
 
         // hack: takes a second for Spotify API to add device to device list
-        await spotifyPlayer.playDefaultDevice(deviceId);
+        await spotifyPlayer.transferPlayback([deviceId]);
         await delay(1000);
         await spotifyPlayer.play(tag);
       } else {
@@ -47,7 +47,6 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
         message: 'ok',
       });
     } catch (e) {
-      console.log(e.stack);
       return res.status(500).send({
         error: `${e}`,
       });

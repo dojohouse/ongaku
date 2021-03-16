@@ -94,6 +94,10 @@ class SpotifyApi {
     const { devices } = body;
     return devices;
   };
+
+  transferPlayback = async (deviceId: string[]) => {
+    await this._proxy!.transferMyPlayback(deviceId);
+  };
 }
 
 const getSpotifyPlayer = (): SpotifyApi => {

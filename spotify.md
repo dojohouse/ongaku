@@ -29,7 +29,7 @@
 
 - It will play on device id `5010e5835e5b937d6673767c688a037601cc602d`
 
-### Use Case 2: All devices are is_active
+### Use Case 2: All devices are `is_active: false`
 
 ```
 [
@@ -53,8 +53,10 @@
   }
 ]
 ```
+
 - It will check if `spotify_default_device_id` is set in `.env` or first item in list
 - **Note**: Seems like there some API restriction for certain device type like iOS
+  - https://developer.spotify.com/documentation/web-playback-sdk/#supported-browsers
 
 ### Use Case 3: No devices
 
