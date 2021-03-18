@@ -34,7 +34,12 @@ Personal Vinyl Record Player  :notes:
     cp .env.config .env
     ```
 
-6. Copy `Client ID` & `Client Secret` to `.env`
+6. Create a copy of the Tags JSON
+    ```sh
+    cp ./server/data/tags.sample.json ./server/data/tags.json
+    ```
+
+7. Copy `Client ID` & `Client Secret` to `.env`
     ```sh
     # Credentials
     client_id='[your-client-id]'
@@ -42,4 +47,4 @@ Personal Vinyl Record Player  :notes:
     redirect_uri='http://localhost:8888/api/spotify/callback'
     ```
 
-7. Install the project with `npm install` and run application with `npm run start`
+8. Install the project with `npm install` and run application with `npm run start`
