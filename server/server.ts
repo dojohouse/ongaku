@@ -2,7 +2,7 @@ import app from './app';
 
 const server = app.listen(8888, () => {
   console.log(
-    'Ongaku server up. Now go to http://localhost:8888/api/spotify/login in your browser.',
+    'Ongaku server up. Now go to http://localhost:8888/api/auth/spotify/login in your browser.',
   );
 });
 
