@@ -48,3 +48,9 @@ Personal Vinyl Record Player  :notes:
     ```
 
 8. Install the project with `npm install` and run application with `npm run start`
+
+## NFC
+
+### PN532 NFC Hat
+
+- https://www.waveshare.com/wiki/PN532_NFC_HAT
