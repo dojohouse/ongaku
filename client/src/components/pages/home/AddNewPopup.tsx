@@ -33,7 +33,7 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
     >
       <div className="p-5 rounded-lg">
         <div>
-          <h2>Add new Tag</h2>
+          <h2>Add New Music Card</h2>
         </div>
         <div>
           <Input
@@ -62,8 +62,8 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
           </div>
           <Input
             className="py-2"
-            label="Tag Id (optional)"
-            placeholder="6f60fd52-2799-4e3a-9d4b-d270ea1a2357"
+            label="Tag Id (NFC UID)"
+            placeholder="0x40x150x910x3a0x580x310x20"
             value={newTag.tagId}
             onChange={(event) =>
               setNewTag({ ...newTag, tagId: event.target.value })

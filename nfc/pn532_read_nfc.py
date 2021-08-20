@@ -12,7 +12,7 @@ pn532.SAM_configuration()
 ONGAKU_API = "http://localhost:8888/api"
 
 
-def read_uid_from_nfc(list_hex: List[hex]) -> str:
+def conver_to_ongaku_id(list_hex: List[hex]) -> str:
     return "".join([hex(value) for value in list_hex])
 
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
             uid = pn532.read_passive_target(timeout=0.5)
             if uid is None:
                 continue
-            uid = read_uid_from_nfc(uid)
+            uid = conver_to_ongaku_id(uid)
             print(f"Card UID: {uid}")
             play_ongaku(uid)
             sleep(1)

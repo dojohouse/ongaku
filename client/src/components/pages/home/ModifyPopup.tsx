@@ -37,7 +37,7 @@ const ModifyPopup: React.FC<ModifyPopupProps> = (props: ModifyPopupProps) => {
     >
       <div className="p-5 rounded-lg">
         <div>
-          <h2>Modify Tag</h2>
+          <h2>Modify Music Card</h2>
         </div>
         <div>
           <Input

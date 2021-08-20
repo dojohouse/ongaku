@@ -33,7 +33,7 @@ const TagCard: React.FC<EmptyTagCardProps> = (props: EmptyTagCardProps) => {
           </svg>
         </div>
         <div className="text-xs pt-2 font-semibold text-gray-500">
-          Add new Tag
+          Add New Music Card
         </div>
       </div>
     </div>
