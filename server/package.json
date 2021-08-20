@@ -32,6 +32,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.ts",
+    "build": "tsc",
+    "serve": "pm2 start dist/server.js --name ongaku_server",
+    "logs": "pm2 logs ongaku_server",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --ext .js,.ts --fix"
   },
