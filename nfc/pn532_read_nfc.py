@@ -1,9 +1,13 @@
 import requests
 import RPi.GPIO as GPIO
+import os
 
 from pn532 import *
 from typing import List
 from time import sleep
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 # pn532 = PN532_SPI(debug=False, reset=20, cs=4)
 # pn532 = PN532_UART(debug=False, reset=20)
