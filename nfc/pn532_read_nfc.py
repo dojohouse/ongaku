@@ -1,14 +1,14 @@
 import requests
-from typing import List
 import RPi.GPIO as GPIO
 
 from pn532 import *
-
+from typing import List
+from time import sleep
 
 # pn532 = PN532_SPI(debug=False, reset=20, cs=4)
 # pn532 = PN532_UART(debug=False, reset=20)
 pn532 = PN532_I2C(debug=False, reset=20, req=16)
-
+pn532.SAM_configuration()
 ONGAKU_API = "http://localhost:8888/api"
 
 
@@ -37,6 +37,7 @@ if __name__ == "__main__":
             uid = read_uid_from_nfc(uid)
             print(f"Card UID: {uid}")
             play_ongaku(uid)
+            sleep(1)
     except Exception as e:
         print(e)
     finally:
