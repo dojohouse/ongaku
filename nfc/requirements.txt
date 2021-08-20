@@ -1,0 +1,4 @@
+requests==2.26.0
+RPi.GPIO==0.7.0
+spidev==3.5.0
+serial==0.0.97
