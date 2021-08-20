@@ -27,7 +27,7 @@ Personal Vinyl Record Player  :notes:
 
 3. Go to `Edit Settings`
 
-4. Add `http://localhost:8888/api/spotify/callback` in `Redirect URIs` section
+4. Add `http://localhost:8888/api/auth/spotify/callback ` in `Redirect URIs` section
 
 5. Create a copy `.env.config` to `.env`
     ```sh
@@ -44,7 +44,7 @@ Personal Vinyl Record Player  :notes:
     # Credentials
     client_id='[your-client-id]'
     client_secret='[your-client-secret]'
-    redirect_uri='http://localhost:8888/api/spotify/callback'
+    redirect_uri='http://localhost:8888/api/auth/spotify/callback '
     ```
 
 8. Install the project with `npm install` and run application with `npm run start`
