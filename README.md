@@ -60,6 +60,8 @@ npm install
 npm run start
 ```
 
+- Create a copy `.env.config` to `.env`
+
 ### Dashboard
 
 #### See all Music Cards
