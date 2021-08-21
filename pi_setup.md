@@ -33,7 +33,7 @@ npm install -g pm2
 
 ## NFC
 
-- Run App: `nohup python3 -u pn532_read_nfc.py > ongaku_nfc.log &`
+- Run App: `nohup python3 -u pn532_read_nfc.py > ongaku_nfc.log 2>&1 &`
 - Logs: `tail ongaku_nfc.log`
 
 To kill
