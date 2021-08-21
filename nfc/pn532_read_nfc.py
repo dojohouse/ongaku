@@ -20,14 +20,33 @@ def conver_to_ongaku_id(list_hex: List[hex]) -> str:
     return "".join([hex(value) for value in list_hex])
 
 
-def play_ongaku(uid: str) -> None:
+def play_ongaku(uid: str) -> bool:
     try:
         url = f"{ONGAKU_API}/music/play/{uid}"
         print(url)
         response = requests.get(url)
         print(response)
+        # cannot find uid -> create new tag
+        if response.status_code == 404:
+            create_new_card(uid)
+            return False
+        return True
     except Exception as error:
         print(error)
+        return False
+
+
+def create_new_card(uid: str) -> None:
+    tag = {
+        "tagId": uid,
+        "musicId": "",
+        "platform": "spotify",
+        "title": "",
+    }
+    url = f"{ONGAKU_API}/tag"
+    print(f"Creating a new tag: {uid}")
+    response = requests.post(url, json=tag)
+    print(response)
 
 
 if __name__ == "__main__":
@@ -45,8 +64,8 @@ if __name__ == "__main__":
                 print("Still playing the same music")
                 sleep(2)
                 continue
-            play_ongaku(uid)
-            previous_uid = uid
+            if play_ongaku(uid):
+                previous_uid = uid
             sleep(2)
     except Exception as e:
         print(e)

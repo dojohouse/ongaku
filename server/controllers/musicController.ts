@@ -11,7 +11,7 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
   const tag = await repository.findById(params.tagId);
 
   if (!tag) {
-    return res.status(400).send({
+    return res.status(404).send({
       error: `Tag Id not found.`,
     });
   }
