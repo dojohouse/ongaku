@@ -106,7 +106,7 @@ python3 pn532_read_nfc.py
 - Create a copy `.env.config` to `.env`
 
 ## TODO
-- [ ] Create an Empty Tag Record when scanning an unused Music Card to modify on the Admin Dashboard
+- [x] Create an Empty Tag Record when scanning an unused Music Card to modify on the Admin Dashboard
 - [ ] Mobile UI for Admin Dashboard
 - [x] Guide for Raspberry PI setup
 - [ ] Support for other Music Platforms
