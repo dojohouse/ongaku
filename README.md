@@ -17,6 +17,7 @@ Personal Vinyl Record Player  :notes:
 2. With the NFC UID, it makes an API call to the server to see what music to play
 3. Server will look for the `music_id` and `platform` for the associated NFC UID (tag_id)
 4. Based off the platform, it will make an API call to the associated platform API
+   - Spotify API will play music on the current [ACTIVE DEVICE](https://developer.spotify.com/documentation/web-api/guides/using-connect-web-api/)
 
 
 ## Server
