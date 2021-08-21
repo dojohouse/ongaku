@@ -1,15 +1,19 @@
 import requests
 import RPi.GPIO as GPIO
+import os
 
 from pn532 import *
 from typing import List
 from time import sleep
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 # pn532 = PN532_SPI(debug=False, reset=20, cs=4)
 # pn532 = PN532_UART(debug=False, reset=20)
 pn532 = PN532_I2C(debug=False, reset=20, req=16)
 pn532.SAM_configuration()
-ONGAKU_API = "http://localhost:8888/api"
+ONGAKU_API =  os.environ.get("ONGAKU_API", "http://localhost:8888/api")
 
 
 def conver_to_ongaku_id(list_hex: List[hex]) -> str:

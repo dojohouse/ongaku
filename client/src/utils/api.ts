@@ -2,9 +2,8 @@ import axios from 'axios';
 
 import { Tag } from '../models';
 
-const API_HOST = process.env.REACT_APP_BACKEND_HOST || 'localhost';
-const API_PORT = process.env.REACT_APP_BACKEND_PORT || 8888;
-const BASE_URL = `http://${API_HOST}:${API_PORT}/api`;
+const BASE_URL =
+  process.env.REACT_APP_ONGAKU_SERVER_API || 'http://localhost:8888/api';
 
 const client = axios.create({
   baseURL: BASE_URL,

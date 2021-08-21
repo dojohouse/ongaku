@@ -3,3 +3,5 @@ _dev/
 venv/
 __pycache__
 .vscode
+dist/
+*.log
