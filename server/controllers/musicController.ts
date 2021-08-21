@@ -1,6 +1,10 @@
+import dotenv from 'dotenv';
 import { Request, Response } from 'express';
 import createConnection from '../utils/createConnection';
 import getSpotifyPlayer from '../utils/getSpotifyPlayer';
+import { delay } from '../utils/helpers';
+
+dotenv.config();
 
 const getPlay = async (req: Request, res: Response): Promise<Response> => {
   const { params } = req;
@@ -20,7 +24,25 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
 
   if (platform === 'spotify') {
     try {
-      await spotifyPlayer.play(tag);
+      const devices = await spotifyPlayer.getDevices();
+
+      // check if all devices are all in_active
+      if (
+        devices.length > 0 &&
+        devices.filter((device) => device.is_active).length === 0
+      ) {
+        // either get default device_id in .env or first device from device list
+        const defaultDeviceId = process.env.spotify_default_device_id as string;
+        const deviceId =
+          defaultDeviceId === '' ? (devices[0].id as string) : defaultDeviceId;
+
+        // hack: takes a second for Spotify API to add device to device list
+        await spotifyPlayer.transferPlayback([deviceId]);
+        await delay(1000);
+        await spotifyPlayer.play(tag);
+      } else {
+        await spotifyPlayer.play(tag);
+      }
       return res.status(200).send({
         message: 'ok',
       });
@@ -36,4 +58,19 @@ const getPlay = async (req: Request, res: Response): Promise<Response> => {
   });
 };
 
-export { getPlay };
+const getDevices = async (_: Request, res: Response): Promise<Response> => {
+  try {
+    const spotifyPlayer = getSpotifyPlayer();
+    const devices = await spotifyPlayer.getDevices();
+    return res.status(200).send({
+      message: 'ok',
+      devices,
+    });
+  } catch (e) {
+    return res.status(500).send({
+      error: `${e}`,
+    });
+  }
+};
+
+export { getPlay, getDevices };

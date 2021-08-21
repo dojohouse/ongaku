@@ -81,6 +81,23 @@ class SpotifyApi {
       context_uri: tag.musicId,
     });
   };
+
+  playDefaultDevice = async (deviceId: string) => {
+    return this._proxy!.play({
+      device_id: deviceId,
+    });
+  };
+
+  getDevices = async (): Promise<SpotifyApi.UserDevice[]> => {
+    const data = await this._proxy!.getMyDevices();
+    const { body } = data;
+    const { devices } = body;
+    return devices;
+  };
+
+  transferPlayback = async (deviceId: string[]) => {
+    await this._proxy!.transferMyPlayback(deviceId);
+  };
 }
 
 const getSpotifyPlayer = (): SpotifyApi => {
