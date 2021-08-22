@@ -81,6 +81,10 @@ class SpotifyApi {
       context_uri: tag.musicId,
     });
   };
+
+  pause = async () => {
+    return this._proxy!.pause();
+  };
 }
 
 const getSpotifyPlayer = (): SpotifyApi => {
