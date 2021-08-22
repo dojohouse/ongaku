@@ -36,6 +36,16 @@ def play_ongaku(uid: str) -> bool:
         return False
 
 
+def pause_ongaku() -> None:
+    try:
+        url = f"{ONGAKU_API}/music/pause"
+        print(url)
+        response = requests.get(url)
+        print(response)
+    except Exception as error:
+        print(error)
+
+
 def create_new_card(uid: str) -> None:
     tag = {
         "tagId": uid,
@@ -54,9 +64,13 @@ if __name__ == "__main__":
         print("Waiting for RFID/NFC card...")
         previous_uid = ""
         while True:
-            # Check if a card is available to read
+            # read raw data from NFC
             uid = pn532.read_passive_target(timeout=0.5)
             if uid is None:
+                # tag removed from NFC -> pause music
+                if previous_uid != "":
+                    pause_ongaku()
+                    previous_uid = ""
                 continue
             uid = conver_to_ongaku_id(uid)
             print(f"Card UID: {uid}")
