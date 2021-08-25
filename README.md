@@ -8,6 +8,8 @@ Personal Vinyl Record Player  :notes:
 
 *Inspired* by [Spotify Vinyl Emulator](https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-3be63d)
 
+![ongaku-gif](./docs/ongaku-gif.gif)
+
 ## How it works?
 
 ![ongaku-play](./docs/ongaku-play.png)
