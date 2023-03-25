@@ -4,7 +4,8 @@
 
 Personal Vinyl Record Player  :notes:
 - Generate your own Music Cards and listen with a simple tap!
-- Every Music Card (NFC Tag) is linked to a Spotify song, playlist, or album
+- Every Music Card (NFC Tag) is linked to a Spotify song, playlist, or album based off the Spotify URI
+   - [How to get Spotify URI?](https://community.spotify.com/t5/FAQs/What-s-a-Spotify-URI/ta-p/919201)
 
 *Inspired* by [Spotify Vinyl Emulator](https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-3be63d)
 
