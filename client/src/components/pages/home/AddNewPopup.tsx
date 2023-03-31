@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tag } from '../../../models';
 import { Input } from '../../common';
+import { convertSpotifyLinkToURI } from '../../../utils/helpers';
 import Popup from 'reactjs-popup';
 
 interface AddNewPopupProps {
@@ -24,6 +25,15 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
     addNewTagHandler,
     loading,
   } = props;
+  
+
+  const [spotifyLink, setSpotifyLink] = useState<string>("");
+
+  const handleSpotifyURI = (value: string) => {
+    setSpotifyLink(value);
+    setNewTag({ ...newTag, musicId: convertSpotifyLinkToURI(value) })
+  }
+
   return (
     <Popup
       open={openNewTag}
@@ -47,6 +57,24 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
           />
           <Input
             className="py-2"
+            label="Platform"
+            placeholder="Spotify"
+            value="spotify"
+            disabled
+          />
+          <Input
+            className="py-2"
+            label="Music Link"
+            value={spotifyLink}
+            onChange={(event) => handleSpotifyURI(event.target.value)}
+          />
+          <div className="text-xxs">
+            <mark className="bg-gray-200">
+              Open Spotify → ••• (next to song/playlist) → Share → Copy Link
+            </mark>
+          </div>
+          <Input
+            className="py-2"
             label="Music Id"
             placeholder="spotify:track:1qPbGZqppFwLwcBC1JQ6Vr"
             value={newTag.musicId}
@@ -54,12 +82,6 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
               setNewTag({ ...newTag, musicId: event.target.value })
             }
           />
-          <div className="text-xxs">
-            <mark className="bg-gray-200">
-              Open Spotify → ••• (next to song/playlist) → Share → Copy Spotify
-              URI
-            </mark>
-          </div>
           <Input
             className="py-2"
             label="Tag Id (NFC UID)"
@@ -68,13 +90,6 @@ const AddNewPopup: React.FC<AddNewPopupProps> = (props: AddNewPopupProps) => {
             onChange={(event) =>
               setNewTag({ ...newTag, tagId: event.target.value })
             }
-          />
-          <Input
-            className="py-2"
-            label="Platform"
-            placeholder="Spotify"
-            value="spotify"
-            disabled
           />
         </div>
         <div className="pt-10 flex justify-end">

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tag } from '../../../models';
 import { Input } from '../../common';
+import { convertSpotifyLinkToURI } from '../../../utils/helpers';
 import Popup from 'reactjs-popup';
 
 interface ModifyPopupProps {
@@ -27,6 +28,14 @@ const ModifyPopup: React.FC<ModifyPopupProps> = (props: ModifyPopupProps) => {
     modifyTagHandler,
     loading,
   } = props;
+
+  const [spotifyLink, setSpotifyLink] = useState<string>("");
+
+  const handleSpotifyURI = (value: string) => {
+    setSpotifyLink(value);
+    setModifyTag({ ...modifyTag, musicId: convertSpotifyLinkToURI(value) })
+  }
+
   return (
     <Popup
       open={openModifyTag}
@@ -50,29 +59,34 @@ const ModifyPopup: React.FC<ModifyPopupProps> = (props: ModifyPopupProps) => {
           />
           <Input
             className="py-2"
-            label="Music Id"
-            value={modifyTag.musicId}
-            onChange={(event) =>
-              setModifyTag({ ...modifyTag, musicId: event.target.value })
-            }
-          />
-          <div className="text-xxs">
-            <mark className="bg-gray-200">
-              Open Spotify → ••• (next to song/playlist) → Share → Copy Spotify
-              URI
-            </mark>
-          </div>
-          <Input
-            className="py-2"
-            label="Tag Id"
-            value={modifyTag.tagId}
+            label="Platform"
+            placeholder="Spotify"
+            value="spotify"
             disabled
           />
           <Input
             className="py-2"
-            label="Platform"
-            placeholder="Spotify"
-            value="spotify"
+            label="Music Link"
+            value={spotifyLink}
+            onChange={(event) => handleSpotifyURI(event.target.value)}
+          />
+          <div className="text-xxs">
+            <mark className="bg-gray-200">
+              Open Spotify → ••• (next to song/playlist) → Share → Copy Link
+            </mark>
+          </div>
+          <Input
+            className="py-2"
+            label="Music Id"
+            value={modifyTag.musicId}
+            onChange={(event) =>
+              setModifyTag({ ...modifyTag, musicId: convertSpotifyLinkToURI(event.target.value) })
+            }
+          />
+          <Input
+            className="py-2"
+            label="Tag Id"
+            value={modifyTag.tagId}
             disabled
           />
         </div>
